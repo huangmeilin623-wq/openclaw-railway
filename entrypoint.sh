@@ -19,4 +19,8 @@ if [ -n "$OPENCLAW_BOOTSTRAP_CRON_B64" ]; then
   echo "[entrypoint] bootstrapped cron/jobs.json from env var"
 fi
 
+# Install wechat-mp plugin
+cd /app
+node openclaw.mjs plugins install "@openclaw-china/wechat-mp" || true
+
 exec su -s /bin/sh node -c 'cd /app && exec node openclaw.mjs gateway --allow-unconfigured'
