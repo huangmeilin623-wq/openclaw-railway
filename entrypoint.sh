@@ -12,8 +12,8 @@ if [ -n "$OPENCLAW_BOOTSTRAP_CONFIG_B64" ]; then
   echo "[entrypoint] bootstrapped openclaw.json from env var"
 fi
 
-# Bootstrap cron jobs from env var (only if file does not exist yet)
-if [ -n "$OPENCLAW_BOOTSTRAP_CRON_B64" ] && [ ! -f /home/node/.openclaw/cron/jobs.json ]; then
+# Bootstrap cron jobs from env var (always overwrite so updates take effect)
+if [ -n "$OPENCLAW_BOOTSTRAP_CRON_B64" ]; then
   echo "$OPENCLAW_BOOTSTRAP_CRON_B64" | base64 -d > /home/node/.openclaw/cron/jobs.json
   chown node:node /home/node/.openclaw/cron/jobs.json
   echo "[entrypoint] bootstrapped cron/jobs.json from env var"
